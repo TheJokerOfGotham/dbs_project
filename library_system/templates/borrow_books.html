@@ -1,0 +1,28 @@
+<h2>Search and Borrow Books</h2>
+
+<form method="GET" action="{% url 'borrow_books' %}">
+    <input type="text" name="q" placeholder="Search for a book..." value="{{ query }}">
+    <button type="submit">Search</button>
+</form>
+
+{% if books %}
+    {% for book in books %}
+        <div>
+            <h3>{{ book.title }} by {{ book.author }}</h3>
+            <p>Available Copies: {{ book.available_copies }}</p>
+            {% if book.available_copies > 0 %}
+                <a href="{% url 'borrow_book' book.isbn %}">
+                    <button>Borrow</button>
+                </a>
+            {% else %}
+                <button disabled>Not Available</button>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No books found.</p>
+{% endif %}
+
+
+<br>
+<a href="/dashboard"><button>Back To Dashboard</button></a>

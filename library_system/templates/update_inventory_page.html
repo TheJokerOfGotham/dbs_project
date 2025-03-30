@@ -1,0 +1,40 @@
+<h1>Update Inventory</h1>
+
+<!-- Search form to find books -->
+<form method="GET" action="{% url 'update_inventory_page' %}">
+    <input type="text" name="q" value="{{ query }}" placeholder="Search by title" required>
+    <button type="submit">Search</button>
+</form>
+
+<!-- Display books based on the search -->
+{% if books %}
+    <table>
+        <thead>
+            <tr>
+                <th>ISBN</th>
+                <th>Title</th>
+                <th>Available Copies</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.isbn }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.available_copies }}</td>
+                    <td>
+                        <!-- Link to the page where the librarian can update the inventory -->
+                        <a href="{% url 'update_inventory' book.isbn %}">
+                            <button>Update Inventory</button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No books found for "{{ query }}"</p>
+{% endif %}
+<br>
+<a href="{% url 'lib_dashboard' %}">Back to Dashboard</a>

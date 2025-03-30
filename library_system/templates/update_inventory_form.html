@@ -1,0 +1,12 @@
+<h1>Update Inventory for "{{ book.title }}"</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <label for="change">Enter the number of books to add or remove:</label><br>
+    <input type="number" name="change" id="change" required><br><br>
+    <button type="submit">Update Inventory</button>
+</form>
+
+<p>Current Inventory: {{ book.available_copies }} copies</p>
+<br>
+<a href="{% url 'lib_dashboard' %}">Back to Dashboard</a>

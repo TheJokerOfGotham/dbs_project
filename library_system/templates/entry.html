@@ -1,20 +1,30 @@
 {% load static %}
 
-
 <html>
-    <link rel="stylesheet" href="{% static "css/styles.css" %}">
     <head>
         <title>Library Management System</title>
+        <!-- Correct placement of CSS file -->
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap" rel="stylesheet">
     </head>
+    <body style="background-image: url('{% static 'images/entry_bg.jpg' %}'); background-size: cover; background-position: center center; background-repeat: no-repeat; ">
 
-    <body>
         <p class="page-title">WELCOME TO LIBRARY MANAGEMENT SYSTEM</p>
-        {% comment %} <a href="/search">
-            <button>LIBRARIAN</button>
-        </a> {% endcomment %}
-        <a href="/register">
-            <button>MEMBER</button>
-        </a>
-        
+        <div style="text-align: center;">
+            <p class="lavishly-yours-regular">Who Art Thou?</p>
+        </div>
+        <br>
+        <div style="text-align: center;">
+            <a href="/lib_login">
+                <button class="entry-button"><strong>LIBRARIAN</strong></button>
+            </a> 
+            <a href="/register">
+                <button class="entry-button"><strong>MEMBER</strong></button>
+            </a>
+        </div>
+
     </body>
 </html>
+
