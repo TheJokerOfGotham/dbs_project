@@ -1,0 +1,24 @@
+<h2>Borrowed Books</h2>
+<table border="1">
+    <tr>
+        <th>Title</th>
+        <th>Due Date</th>
+        <th>Return</th>
+    </tr>
+    {% for transaction in transactions %}
+    <tr>
+        <td>{{ transaction.book.title }}</td>
+        <td>{{ transaction.due_date }}</td>
+        <td>
+            <a href="{% url 'return_book' transaction.transaction_id %}">
+                <button>Return</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+
+    <br>
+
+</table>
+
+<a href="/dashboard"><button>Back To Dashboard</button></a>

@@ -13,5 +13,18 @@ urlpatterns = [
     path("logout/", LogoutView.as_view(next_page="login"), name="logout"),
     path("dashboard/", views.dashboard, name="dashboard"),
     path("logout/", views.logout_view, name="logout"),
+    path("lib_login/", views.lib_login, name="lib_login"),
+    path("lib_dashboard/", views.lib_dashboard, name="lib_dashboard"),
+    path("lib_logout/", LogoutView.as_view(next_page="lib_login"), name="lib_logout"),
+    path("add_book/", views.add_book, name="add_book"),
+    path('borrow/', views.borrow_books_page, name='borrow_books'),
+    path('borrow/<str:isbn>/', views.borrow_book, name='borrow_book'),
+    path('return/', views.return_books_page, name='return_books_page'),
+    path('return/<int:transaction_id>/', views.return_book, name='return_book'),
+    path('view_reports/', views.view_reports, name='view_reports'),
+    path('pay_penalties/', views.pay_penalties, name='pay_penalties'),
+
+
+
 
 ]

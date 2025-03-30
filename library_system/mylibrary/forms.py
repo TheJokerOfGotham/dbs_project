@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Member
+from .models import Member, Book
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -24,4 +24,11 @@ class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
         fields = ['name', 'phone', 'address']  # Exclude 'membership_date'
+
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = ["isbn", "title", "author", "genre", "published_year", "total_copies"]
+
+
 

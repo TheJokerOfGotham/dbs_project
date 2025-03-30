@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Penalties</title>
+</head>
+<body>
+    <h1>Penalties</h1>
+
+    {% if penalties %}
+        <form method="POST">
+            {% csrf_token %}
+            <ul>
+                {% for penalty in penalties %}
+                    <li>
+                        <label>
+                            <input type="checkbox" name="penalties" value="{{ penalty.penalty_id }}">
+                            Penalty for transaction {{ penalty.transaction.transaction_id }}: ₹{{ penalty.amount }}
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
+            <button type="submit">Pay Selected Penalties</button>
+        </form>
+    {% else %}
+        <p>You have no unpaid penalties.</p>
+    {% endif %}
+</body>
+</html>
