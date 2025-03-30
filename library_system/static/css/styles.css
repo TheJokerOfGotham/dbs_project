@@ -6,8 +6,9 @@
     text-align: center;
 
     line-height: 24px;
-
-    background-color: rgb(28, 28, 63);  /* Adds a solid blue background */
+    border-radius: 20px;
+    border-color: white;
+    background-color: rgb(24, 24, 37);  /* Adds a solid blue background */
     color: white;  /* Ensures the text is readable */
     padding: 20px;  /* Adds space around the text */
     padding-top: 60px;
@@ -16,6 +17,56 @@
     /* (Optional) Rounds the corners */
 }
 
-.entry-button{
-    font-family: Arial;
+
+.lavishly-yours-regular {
+    font-family: "Lavishly Yours", cursive;
+    font-weight: 1000;
+    font-size: 40px;
+    font-style: normal;
+    text-align: center;
+    background-color: white;  /* Background only around text */
+    color: rgb(24, 24, 37);
+    display: inline-block;  /* Makes background wrap around text */
+    padding: 10px;  /* Adds space around the text */
+    border-radius: 5px; /* (Optional) Rounds the corners */
+
+
 }
+  
+
+.entry-button{
+    color: rgb(24, 24, 37);
+    font-family: Arial;
+    font-size: 115px;
+    margin-right: 85px;
+    margin-top: 100px;
+    border-color: rgb(24, 24, 37);
+    background-color: white;
+    border-style: solid;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    border-radius: 35px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    
+}
+
+.entry-button:hover{
+    background-color: rgb(24, 24, 37);
+    color: white;
+}
+.entry-button:active{
+    opacity: 0.8;
+    background-color: rgb(36, 36, 54);
+}
+
+body {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    
+}
+
+

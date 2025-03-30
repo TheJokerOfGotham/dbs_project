@@ -10,6 +10,8 @@ from django.http import HttpResponseForbidden
 from .forms import BookForm
 from datetime import timedelta, date
 from django.utils.timezone import now
+from .forms import BookSearchForm
+
 
 
 
@@ -33,7 +35,7 @@ def register(request):
             user.save()
 
             member = member_form.save(commit=False)
-            member.user = user  # Link Member with User
+            member.user = user  
             member.email = user.email  # Sync email
             member.save()
 
@@ -309,3 +311,80 @@ def pay_penalties(request):
 
 
 
+@login_required
+def search_books(request):
+    # Initialize the form
+    form = BookSearchForm(request.GET)
+    books = None
+
+    if request.method == "GET" and form.is_valid():
+        search_query = form.cleaned_data.get("search_query")
+
+        # Filter books based on search query (either by title or ISBN)
+        books = Book.objects.filter(
+            title__icontains=search_query
+        ) | Book.objects.filter(
+            isbn__icontains=search_query
+        )
+
+    return render(request, "search_books.html", {"form": form, "books": books})
+
+
+@login_required
+def remove_book_page(request):
+    """ Page for librarians to search for and remove books """
+    if not hasattr(request.user, 'librarian'):
+        return HttpResponseForbidden("You are not authorized to remove books.")
+
+    # Handle the form submission for searching books
+    query = request.GET.get('q', '')
+    books = Book.objects.filter(title__icontains=query)  # Simple search by title
+
+    return render(request, "remove_book_page.html", {"books": books, "query": query})
+
+@login_required
+def remove_book(request, isbn):
+    """ Remove a book from the system """
+    if not hasattr(request.user, 'librarian'):
+        return HttpResponseForbidden("You are not authorized to remove books.")
+
+    book = get_object_or_404(Book, isbn=isbn)
+    book.delete()
+
+    return redirect('lib_dashboard')  # Redirect back to the librarian dashboard
+
+
+@login_required
+def update_inventory_page(request):
+    """ Page for librarians to search and update inventory """
+    if not hasattr(request.user, 'librarian'):
+        return HttpResponseForbidden("You are not authorized to update inventory.")
+
+    query = request.GET.get('q', '')
+    books = Book.objects.filter(title__icontains=query)  # Simple search by title
+
+    return render(request, "update_inventory_page.html", {"books": books, "query": query})
+
+@login_required
+def update_inventory(request, isbn):
+    """ Update the inventory of a book (increase or decrease) """
+    if not hasattr(request.user, 'librarian'):
+        return HttpResponseForbidden("You are not authorized to update inventory.")
+
+    book = get_object_or_404(Book, isbn=isbn)
+
+    if request.method == "POST":
+        # Get the inventory change (positive for increase, negative for decrease)
+        change = int(request.POST.get('change'))
+        
+        # Ensure inventory doesn't go below 0
+        if book.available_copies + change < 0:
+            return HttpResponseForbidden("Inventory cannot go below 0.")
+
+        # Update the available copies
+        book.available_copies += change
+        book.save()
+
+        return redirect('lib_dashboard')  # Redirect back to the dashboard
+
+    return render(request, "update_inventory_form.html", {"book": book})

@@ -31,4 +31,6 @@ class BookForm(forms.ModelForm):
         fields = ["isbn", "title", "author", "genre", "published_year", "total_copies"]
 
 
+class BookSearchForm(forms.Form):
+    search_query = forms.CharField(max_length=255, required=False, label="Search by Title or ISBN")
 

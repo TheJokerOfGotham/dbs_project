@@ -23,6 +23,12 @@ urlpatterns = [
     path('return/<int:transaction_id>/', views.return_book, name='return_book'),
     path('view_reports/', views.view_reports, name='view_reports'),
     path('pay_penalties/', views.pay_penalties, name='pay_penalties'),
+    path('search_books/', views.search_books, name='search_books'),
+    path('remove_book/', views.remove_book_page, name='remove_book_page'),
+    path('remove_book/<str:isbn>/', views.remove_book, name='remove_book'),
+    path('update_inventory/', views.update_inventory_page, name='update_inventory_page'),
+    path('update_inventory/<str:isbn>/', views.update_inventory, name='update_inventory'),
+
 
 
 
