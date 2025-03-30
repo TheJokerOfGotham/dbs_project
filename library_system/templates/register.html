@@ -1,0 +1,10 @@
+<form method="post">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ member_form.as_p }}
+    <button type="submit">Register</button>
+    <br>
+    <p>Already Registered? <a href="/login">Login</a>
+    <br>
+    <p><a href="/">Back To Start</a>
+</form>
