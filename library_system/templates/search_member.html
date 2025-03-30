@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Members</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Search for a Member</h2>
+        <form method="GET" action="{% url 'search_member' %}">
+            <input type="text" name="q" placeholder="Enter member name" value="{{ query }}">
+            <button type="submit">Search</button>
+        </form>
+
+        <br>
+
+        {% if members %}
+            <table border="1">
+                <tr>
+                    <th>Membership ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Membership Date</th>
+                </tr>
+                {% for member in members %}
+                <tr>
+                    <td>{{ member.membership_id }}</td>
+                    <td>{{ member.name }}</td>
+                    <td>{{ member.email }}</td>
+                    <td>{{ member.phone }}</td>
+                    <td>{{ member.address }}</td>
+                    <td>{{ member.membership_date }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No members found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

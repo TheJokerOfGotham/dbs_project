@@ -1,0 +1,21 @@
+.page-title{
+    font-family: Arial;
+    font-size: 70px;
+    font-weight: bold;
+    
+    text-align: center;
+
+    line-height: 24px;
+
+    background-color: rgb(28, 28, 63);  /* Adds a solid blue background */
+    color: white;  /* Ensures the text is readable */
+    padding: 20px;  /* Adds space around the text */
+    padding-top: 60px;
+    padding-bottom: 60px;
+    /*display: inline-block;*/  /* Makes background wrap around the text */
+    /* (Optional) Rounds the corners */
+}
+
+.entry-button{
+    font-family: Arial;
+}
