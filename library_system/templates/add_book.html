@@ -45,7 +45,7 @@
             }
             a {
                 display: block;
-                margin-top: 15px;
+                {% comment %} margin-top: 15px; {% endcomment %}
                 color: #007bff;
                 text-decoration: none;
             }
@@ -71,6 +71,7 @@
                     {{ form.as_p }}
                     <button type="submit">Add Book</button>
                 </form>
+                
                 <a href="{% url 'lib_dashboard' %}">Back to Dashboard</a>
             </div>
         </div>

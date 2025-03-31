@@ -1,28 +1,149 @@
-<h2>Search and Borrow Books</h2>
+<!DOCTYPE html>
+{% load static %}
 
-<form method="GET" action="{% url 'borrow_books' %}">
-    <input type="text" name="q" placeholder="Search for a book..." value="{{ query }}">
-    <button type="submit">Search</button>
-</form>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Borrow Books</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{% static 'images/lib_dash.jpg' %}');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
 
-{% if books %}
-    {% for book in books %}
-        <div>
-            <h3>{{ book.title }} by {{ book.author }}</h3>
-            <p>Available Copies: {{ book.available_copies }}</p>
-            {% if book.available_copies > 0 %}
-                <a href="{% url 'borrow_book' book.isbn %}">
-                    <button>Borrow</button>
-                </a>
-            {% else %}
-                <button disabled>Not Available</button>
-            {% endif %}
+        .container {
+            margin-top: 50px;
+        }
+
+        .form-box {
+            background: rgba(255, 255, 255);
+            padding: 20px;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgb(24, 24, 37);
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 250px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+
+
+        .book-entry {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 15px;
+            margin: 10px auto;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid #007bff;
+        }
+
+        .book-entry h3, .book-entry p {
+            margin: 0;
+            padding: 0 10px;
+            color: rgb(24, 24, 37);
+        }
+
+        .borrow-btn {
+            margin-left: auto;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            display: inline-block;
+            {% comment %} margin-top: 15px; {% endcomment %}
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .hstyle {
+            color: rgb(24, 24, 37); /* Dark text color */
+            background: white; /* White background */
+            display: inline-block; /* Only as wide as the text */
+            padding: 10px 20px; /* Padding around the text */
+            border-radius: 8px; /* Rounded corners */
+            border: 2px solid rgb(24, 24, 37); /* Border matching text color */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <p class="gen_page">SEARCH AND BORROW BOOKS</p>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>     </div>
+    <div class="container">
+
+        <div class="form-box">
+            <form method="GET" action="{% url 'borrow_books' %}">
+                <input type="text" name="q" placeholder="Search for a book..." value="{{ query }}">
+                <button type="submit" class="search-button-remove">Search</button>
+                <br><br>
+                <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+            </form>
         </div>
-    {% endfor %}
-{% else %}
-    <p>No books found.</p>
-{% endif %}
 
+        <br>
 
-<br>
-<a href="/dashboard"><button>Back To Dashboard</button></a>
+        {% if books %}
+            {% for book in books %}
+                <div class="book-entry">
+                    <h3 >{{ book.title }} by {{ book.author }}</h3>
+                    <p>Available Copies: {{ book.available_copies }}</p>
+                    <div class="borrow-btn">
+                        {% if book.available_copies > 0 %}
+                            <a href="{% url 'borrow_book' book.isbn %}">
+                                <button>Borrow</button>
+                            </a>
+                        {% else %}
+                            <button disabled>Not Available</button>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h3 class="hstyle">No books found.</h3>
+        {% endif %}
+
+        <br>
+    </div>
+</body>
+</html>

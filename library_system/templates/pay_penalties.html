@@ -1,30 +1,155 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <title>Pay Penalties</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{% static 'images/lib_dash.jpg' %}');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .form-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid #007bff;
+            text-align: left;
+            width: 450px;
+        }
+
+        h2 {
+            color: rgb(24, 24, 37);
+            background: white;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px solid rgb(24, 24, 37);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background: white;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid #007bff;
+        }
+
+        label {
+            font-size: 20px;
+            color: rgb(24, 24, 37);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            {% comment %} margin-top: 10px; {% endcomment %}
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            display: inline-block;
+            {% comment %} margin-top: 15px; {% endcomment %}
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .no-penalties {
+            font-size: 18px;
+            color: rgb(24, 24, 37);
+            background: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px solid rgb(24, 24, 37);
+            display: inline-block;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .hstyle {
+            color: rgb(24, 24, 37); /* Dark text color */
+            background: white; /* White background */
+            display: inline-block; /* Only as wide as the text */
+            padding: 10px 20px; /* Padding around the text */
+            border-radius: 8px; /* Rounded corners */
+            border: 2px solid rgb(24, 24, 37); /* Border matching text color */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+    </style>
 </head>
 <body>
-    <h1>Penalties</h1>
+    <div class="header">
+        <p class="gen_page">PAY PENALTY</p>
 
-    {% if penalties %}
-        <form method="POST">
+        <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
-            <ul>
-                {% for penalty in penalties %}
-                    <li>
-                        <label>
-                            <input type="checkbox" name="penalties" value="{{ penalty.penalty_id }}">
-                            Penalty for transaction {{ penalty.transaction.transaction_id }}: ₹{{ penalty.amount }}
-                        </label>
-                    </li>
-                {% endfor %}
-            </ul>
-            <button type="submit">Pay Selected Penalties</button>
-        </form>
-    {% else %}
-        <p>You have no unpaid penalties.</p>
-    {% endif %}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form> 
+    </div>
+    <div class="container">
+    
+
+        {% if penalties %}
+            <div class="form-box">
+                <form method="POST">
+                    {% csrf_token %}
+                    <ul>
+                        {% for penalty in penalties %}
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="penalties" value="{{ penalty.penalty_id }}">
+                                    Penalty for transaction {{ penalty.transaction.transaction_id }}: ₹{{ penalty.amount }}
+                                </label>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <button type="submit">Pay Selected Penalties</button>
+                </form>
+            </div>
+        {% else %}
+            <h3 class="hstyle">You have no unpaid penalties.</h3>
+        {% endif %}
+
+        <br>
+        <a href="/dashboard"><button class="search-button-remove">Back To Dashboard</button></a>
+    </div>
 </body>
 </html>

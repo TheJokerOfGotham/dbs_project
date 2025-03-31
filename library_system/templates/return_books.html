@@ -1,24 +1,123 @@
-<h2>Borrowed Books</h2>
-<table border="1">
-    <tr>
-        <th>Title</th>
-        <th>Due Date</th>
-        <th>Return</th>
-    </tr>
-    {% for transaction in transactions %}
-    <tr>
-        <td>{{ transaction.book.title }}</td>
-        <td>{{ transaction.due_date }}</td>
-        <td>
-            <a href="{% url 'return_book' transaction.transaction_id %}">
-                <button>Return</button>
-            </a>
-        </td>
-    </tr>
-    {% endfor %}
+<!DOCTYPE html>
+{% load static %}
 
-    <br>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Borrowed Books</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{% static 'images/lib_dash.jpg' %}');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
 
-</table>
+        .container {
+            margin-top: 50px;
+        }
 
-<a href="/dashboard"><button>Back To Dashboard</button></a>
+        h2 {
+            color: rgb(24, 24, 37);
+            background: white;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px solid rgb(24, 24, 37);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <p class="gen_page">RETURN BOOKS</p>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+    <div class="container">
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Due Date</th>
+                    <th>Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.book.title }}</td>
+                    <td>{{ transaction.due_date }}</td>
+                    <td>
+                        <a href="{% url 'return_book' transaction.transaction_id %}">
+                            <button>Return</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <br>
+        <a href="/dashboard"><button class="search-button-remove">Back To Dashboard</button></a>
+    </div>
+</body>
+</html>

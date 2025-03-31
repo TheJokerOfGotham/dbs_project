@@ -37,7 +37,7 @@
 .entry-button{
     color: rgb(24, 24, 37);
     font-family: Arial;
-    font-size: 115px;
+    font-size: 85px;
     margin-right: 85px;
     margin-top: 100px;
     border-color: rgb(24, 24, 37);
@@ -51,6 +51,7 @@
     border-radius: 35px;
     cursor: pointer;
     transition: background-color 0.5s;
+    
     
 }
 

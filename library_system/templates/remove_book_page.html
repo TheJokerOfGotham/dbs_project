@@ -68,12 +68,21 @@
             }
             a {
                 display: block;
-                margin-top: 12px;
+                {% comment %} margin-top: 12px; {% endcomment %}
                 color: #007bff;
                 text-decoration: none;
             }
             a:hover {
                 text-decoration: underline;
+            }
+            h3 {
+                color: rgb(24, 24, 37); /* Dark text color */
+                background: white; /* White background */
+                display: inline-block; /* Only as wide as the text */
+                padding: 10px 20px; /* Padding around the text */
+                border-radius: 8px; /* Rounded corners */
+                border: 2px solid rgb(24, 24, 37); /* Border matching text color */
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
             }
 
         </style>
@@ -94,11 +103,12 @@
                 <form method="GET" action="{% url 'remove_book_page' %}">
                     <input type="text" name="q" value="{{ query }}" placeholder="Search by title" required>
                     <button type="submit" class="search-button-remove">Search</button>
+                    <br><br>
                     <a href="{% url 'lib_dashboard' %}">Back to Dashboard</a>
 
                 </form>
             </div>
-
+            <br>
             <!-- List of books -->
             {% if books %}
                 <table>
@@ -126,7 +136,7 @@
                     </tbody>
                 </table>
             {% else %}
-                <p>No books found for "{{ query }}"</p>
+                <h3>No books found for "{{ query }}"</h3>
             {% endif %}
         </div>
     </body>

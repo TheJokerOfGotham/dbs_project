@@ -1,10 +1,144 @@
-<form method="post">
-    {% csrf_token %}
-    {{ user_form.as_p }}
-    {{ member_form.as_p }}
-    <button type="submit">Register</button>
-    <br>
-    <p>Already Registered? <a href="/login">Login</a>
-    <br>
-    <p><a href="/">Back To Start</a>
-</form>
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{% static 'images/register.jpg' %}'); /* Background for register */
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .form-box {
+            background: rgba(255, 255, 255);
+            padding: 40px;
+   
+            width: 450px;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid #007bff;
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            color: rgb(24, 24, 37);
+            width: 30%;  /* Adjust label width */
+            text-align: right;
+            padding-right: 10px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 65%;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            font-size: 16px;
+            color: rgb(24, 24, 37);
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        h2 {
+            text-align: center;
+            color: rgb(24, 24, 37);
+            background: white;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px solid rgb(24, 24, 37);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body style="background-image: url('{% static 'images/login.jpg' %}'); background-size: cover; background-position: center center; background-repeat: no-repeat; ">
+
+    <div class="container">
+        <div class="form-box">
+
+            <form method="POST">
+                {% csrf_token %}
+                {% for field in user_form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                {% for field in member_form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <div class="back-link">
+                    <button type="submit">Register</button>
+                </div>
+
+            </form>
+            <p>Already Registered? <a href="/login">Login</a></p>
+            <div class="back-link">
+                <a href="/">Back To Start</a>
+            </div>
+           
+        </div>
+    </div>
+</body>
+</html>
