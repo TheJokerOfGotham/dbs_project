@@ -1,42 +1,139 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Books</title>
-</head>
-<body>
-    <h1>Search Books</h1>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-    <form method="GET">
-        {{ form.as_p }}
-        <button type="submit">Search</button>
-    </form>
+       
+        <title>Search Books</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-image: url('{% static 'images/lib_dash.jpg' %}');
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: fixed; /* Keeps the background fixed while scrolling */
+                height: 100vh; /* Ensures the full viewport is covered */
+                margin: 0; /* Removes any unwanted margins */
+                text-align: center;
+            }
+            
+            .container {
+                margin-top: 50px;
+            }
+            .form-box {
+                background: rgba(255, 255, 255, 0.9);
+                padding: 20px;
+                display: inline-block;
+                border-radius: 10px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                border: 2px solid #007bff; /* Blue border for search */
+            }
+            input, select {
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                width: 250px;
+            }
+            button {
+                background-color: #007bff; /* Blue color for search */
+                color: white;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #0056b3;
+            }
+            table {
+                width: 80%;
+                margin: 20px auto;
+                border-collapse: collapse;
+                background: white;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            th, td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                text-align: center;
+            }
+            th {
+                background-color: #007bff;
+                color: white;
+            }
+            tr:hover {
+                background-color: #f1f1f1;
+            }
+            a {
+                display: block;
+                margin-top: 15px;
+                color: #007bff;
+                text-decoration: none;
 
-    {% if books %}
-        <h2>Search Results</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Available Copies</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for book in books %}
-                    <tr>
-                        <td>{{ book.title }}</td>
-                        <td>{{ book.available_copies }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>No books found</p>
-    {% endif %}
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            h3 {
+                color: rgb(24, 24, 37); /* Dark text color */
+                background: white; /* White background */
+                display: inline-block; /* Only as wide as the text */
+                padding: 10px 20px; /* Padding around the text */
+                border-radius: 8px; /* Rounded corners */
+                border: 2px solid rgb(24, 24, 37); /* Border matching text color */
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            }
+        </style>
+    </head>
+    <body style="background-image: url('{% static 'images/lib_dash.jpg' %}'); background-size: cover; background-position: center center; background-repeat: no-repeat; ">
+        <div class="header">
+            <p class="gen_page">SEARCH BOOKS</p>
+            <form action="{% url 'lib_logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+        <div class="container">
 
-    <br>
-    <a href="{% url 'lib_dashboard' %}">Back to Dashboard</a>
 
-</body>
+            <!-- Search Form -->
+            <div class="form-box">
+                <form method="GET">
+                    {{ form.as_p }}
+                    <button type="submit">Search</button>
+                    <a href="{% url 'lib_dashboard' %}">Back to Dashboard</a>
+                </form>
+            </div>
+            <br>
+            {% if books %}
+            
+                <h3>Search Results</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Available Copies</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in books %}
+                            <tr>
+                                <td>{{ book.title }}</td>
+                                <td>{{ book.available_copies }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <h3>No books found</h3>
+            {% endif %}
+
+
+        </div>
+    </body>
 </html>

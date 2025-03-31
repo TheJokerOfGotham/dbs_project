@@ -1,7 +1,81 @@
-<h2>Add a New Book</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Add Book</button>
-</form>
-<a href="{% url 'lib_dashboard' %}">Back to Dashboard</a>
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+        <title>ADD BOOKS</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-image: url('{% static 'images/lib_dash.jpg' %}');
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: fixed; /* Keeps the background fixed while scrolling */
+                height: 100vh; /* Ensures the full viewport is covered */
+                margin: 0; /* Removes any unwanted margins */
+                text-align: center;
+            }
+            .container {
+                text-align: center;
+                margin-top: 150px;
+            }
+            .form-box {
+                font-size: 25px;
+                background: rgba(255, 255, 255, 1.0); /* Light background with slight transparency */
+                padding: 20px;
+                display: inline-block;
+                border-radius: 10px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+                border: 2px solid rgb(24, 24, 37); /* Blue border */
+
+            }
+            button {
+                background-color: #007bff;
+                color: white;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 25px;
+            }
+            button:hover {
+                background-color: #0056b3;
+            }
+            a {
+                display: block;
+                margin-top: 15px;
+                color: #007bff;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body style="background-image: url('{% static 'images/lib_dash.jpg' %}'); background-size: cover; background-position: center center; background-repeat: no-repeat; ">
+        <div class="header">
+            <p class="gen_page">ADD BOOK</p>
+            <form action="{% url 'lib_logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+        
+        <div class="container">
+            
+            <div class="form-box">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Add Book</button>
+                </form>
+                <a href="{% url 'lib_dashboard' %}">Back to Dashboard</a>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+

@@ -1,12 +1,118 @@
-<h1>Update Inventory for "{{ book.title }}"</h1>
+<!DOCTYPE html>
+{% load static %}
 
-<form method="POST">
-    {% csrf_token %}
-    <label for="change">Enter the number of books to add or remove:</label><br>
-    <input type="number" name="change" id="change" required><br><br>
-    <button type="submit">Update Inventory</button>
-</form>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Update Inventory</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{% static 'images/lib_dash.jpg' %}');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
 
-<p>Current Inventory: {{ book.available_copies }} copies</p>
-<br>
-<a href="{% url 'lib_dashboard' %}">Back to Dashboard</a>
+        .container {
+            margin-top: 50px;
+        }
+
+        .form-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid #007bff;
+            margin-top: 20px;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 250px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            font-size: 18px;
+            color: rgb(24, 24, 37);
+            background: white;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px solid rgb(24, 24, 37);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            display: block;
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        h2 {
+            color: rgb(24, 24, 37);
+            background: white;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 2px solid rgb(24, 24, 37);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <p class="gen_page">UPDATE INVENTORY</p>
+        <form action="{% url 'lib_logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+    
+    <div class="container">
+        <h2>Update Inventory for "{{ book.title }}"</h2>
+    <br>
+        <p>Current Inventory: {{ book.available_copies }} copies</p>
+        <br>
+        <div class="form-box">
+            <form method="POST">
+                {% csrf_token %}
+                <label for="change">Enter the number of books to add or remove:</label><br>
+                <input type="number" name="change" id="change" required><br><br>
+                <button type="submit">Update Inventory</button>
+                <a href="{% url 'lib_dashboard' %}">Back to Dashboard</a>
+            </form>
+        </div>
+        <br>
+
+
+
+
+    </div>
+</body>
+</html>

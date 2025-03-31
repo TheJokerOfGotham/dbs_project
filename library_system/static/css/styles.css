@@ -41,6 +41,7 @@
     margin-right: 85px;
     margin-top: 100px;
     border-color: rgb(24, 24, 37);
+    border-width: 5px;
     background-color: white;
     border-style: solid;
     padding-top: 50px;
@@ -69,4 +70,231 @@ body {
     
 }
 
+.gen_page{
+    font-family: Arial;
+    font-size: 32px;
+    font-weight: bold;
+    background-color: rgb(24, 24, 37); 
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 0
 
+}
+
+.header {
+    display: flex;
+    align-items: center; /* Aligns items vertically */
+    justify-content: space-between; /* Ensures spacing between text and button */
+    background-color: rgb(24, 24, 37); /* Optional background */
+    padding: 15px;
+}
+
+.rectangle {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    height: 100px; /* Adjust height as needed */
+    background-color: rgba(24, 24, 37, 0.8); /* Dark color with opacity */
+    z-index: -1; /* Sends it to the background */
+}
+
+.content {
+    position: relative;
+    padding: 20px;
+    color: white;
+}
+
+.logout-btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.4s;
+}
+
+.logout-btn:hover {
+    background-color: darkred;
+}
+
+.logout-btn:active{
+    opacity: 0.7;
+}
+
+.lib-choice-button{
+
+    width: 320px;
+    height: 320px;
+    font-family: Arial;
+    font-size: 45px;
+    margin-right: 50px;
+    margin-top: 60px;
+    font-weight: bold;
+    border-width: 5px;
+
+    border-style: solid;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 35px;
+    cursor: pointer;
+
+    transition: background-color 0.5s;
+}
+
+.add-book{
+    border-color: rgb(22, 155, 22);
+    background-color: rgb(22, 155, 22);
+    color: white;
+}
+
+.add-book:hover{
+    background-color: white;
+    color: rgb(22, 155, 22);
+}
+
+.add-book:active{
+    opacity: 0.6;
+}
+
+.remove-book{
+    border-color: rgb(236, 22, 22);
+    background-color: rgb(236, 22, 22);
+    color: white;
+}
+
+.remove-book:hover{
+    background-color: white;
+    color: red;
+}
+
+.remove-book:active{
+    opacity: 0.6;
+}
+
+.search-book{
+    border-color: rgb(189, 144, 30);
+    background-color: rgb(189, 144, 30);
+    color: white;
+}
+
+.search-book:hover{
+    background-color: white;
+    color: rgb(189, 144, 30);
+}
+
+.search-book:active{
+    opacity: 0.6;
+}
+
+.update-inv{
+    border-color: rgb(33, 156, 150);
+    background-color: rgb(33, 156, 150);
+    color: white;
+}
+
+.update-inv:hover{
+    background-color: white;
+    color: rgb(33, 156, 150);
+}
+
+.update-inv:active{
+    opacity: 0.6;
+}
+
+/* Form Container */
+.form-container {
+    width: 400px; /* Adjust width as needed */
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgb(24, 24, 37); /* Dark background */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    color: white;
+    text-align: center;
+}
+
+/* Headings */
+.form-container h2 {
+    margin-bottom: 15px;
+    font-size: 24px;
+    color: white;
+}
+
+/* Form Styling */
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adds space between elements */
+}
+
+/* Django Form Fields */
+.form-container input,
+.form-container textarea,
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: white;
+    color: black;
+}
+
+/* Focus Effect */
+.form-container input:focus,
+.form-container textarea:focus,
+.form-container select:focus {
+    border-color: blue;
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 255, 0.5);
+}
+
+/* Submit Button */
+.form-container button {
+    padding: 12px;
+    background-color: blue;
+    color: white;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+    background-color: darkblue;
+}
+
+/* Back to Dashboard Link */
+.form-container a {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #ccc;
+    font-weight: bold;
+}
+
+.form-container a:hover {
+    color: white;
+}
+
+.search-button-remove{
+    background-color: rgb(24, 24, 37);
+    color: white;
+    transition: background-color 0.4s;
+}
+
+.search-button-remove:hover{
+    background-color: rgb(18, 18, 26);
+}
+
+.search-button-remove:active{
+    opacity: 0.7;
+}

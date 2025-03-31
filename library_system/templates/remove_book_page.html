@@ -1,38 +1,133 @@
-<h1>Remove Book</h1>
 
-<!-- Search form to find books -->
-<form method="GET" action="{% url 'remove_book_page' %}">
-    <input type="text" name="q" value="{{ query }}" placeholder="Search by title" required>
-    <button type="submit">Search</button>
-</form>
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-<!-- List of books found based on search -->
-{% if books %}
-    <table>
-        <thead>
-            <tr>
-                <th>ISBN</th>
-                <th>Title</th>
-                <th>Available Copies</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for book in books %}
-                <tr>
-                    <td>{{ book.isbn }}</td>
-                    <td>{{ book.title }}</td>
-                    <td>{{ book.available_copies }}</td>
-                    <td>
-                        <!-- Remove button for each book -->
-                        <a href="{% url 'remove_book' book.isbn %}" onclick="return confirm('Are you sure you want to remove this book?');">
-                            <button>Remove Book</button>
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <p>No books found for "{{ query }}"</p>
-{% endif %}
+        <title>Remove Book</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-image: url('{% static 'images/lib_dash.jpg' %}');
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-attachment: fixed; /* Keeps the background fixed while scrolling */
+                height: 100vh; /* Ensures the full viewport is covered */
+                margin: 0; /* Removes any unwanted margins */
+                text-align: center;
+            }
+            .container {
+                margin-top: 50px;
+            }
+            .form-box {
+                background: rgba(255, 255, 255, 1.0);
+                padding: 20px;
+                display: inline-block;
+                border-radius: 10px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                border: 2px solid rgb(24, 24, 37); /* Red border for remove action */
+            }
+            input[type="text"] {
+                padding: 7px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                width: 250px;
+            }
+            button {
+                background-color: #dc3545; /* Red color for remove action */
+                color: white;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #a71d2a;
+            }
+            table {
+                width: 80%;
+                margin: 20px auto;
+                border-collapse: collapse;
+                background: white;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            th, td {
+                padding: 10px;
+                border-bottom: 1px solid #ddd;
+                text-align: center;
+            }
+            th {
+                background-color: #007bff;
+                color: white;
+            }
+            tr:hover {
+                background-color: #f1f1f1;
+            }
+            a {
+                display: block;
+                margin-top: 12px;
+                color: #007bff;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+
+        </style>
+    </head>
+    <body style="background-image: url('{% static 'images/lib_dash.jpg' %}'); background-size: cover; background-position: center center; background-repeat: no-repeat; ">
+        <div class="header">
+            <p class="gen_page">REMOVE BOOK</p>
+            <form action="{% url 'lib_logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+        <div class="container">
+            
+
+            <!-- Search form -->
+            <div class="form-box">
+                <form method="GET" action="{% url 'remove_book_page' %}">
+                    <input type="text" name="q" value="{{ query }}" placeholder="Search by title" required>
+                    <button type="submit" class="search-button-remove">Search</button>
+                    <a href="{% url 'lib_dashboard' %}">Back to Dashboard</a>
+
+                </form>
+            </div>
+
+            <!-- List of books -->
+            {% if books %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ISBN</th>
+                            <th>Title</th>
+                            <th>Available Copies</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in books %}
+                            <tr>
+                                <td>{{ book.isbn }}</td>
+                                <td>{{ book.title }}</td>
+                                <td>{{ book.available_copies }}</td>
+                                <td>
+                                    <a href="{% url 'remove_book' book.isbn %}" onclick="return confirm('Are you sure you want to remove this book?');">
+                                        <button>REMOVE BOOK</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No books found for "{{ query }}"</p>
+            {% endif %}
+        </div>
+    </body>
+</html>
